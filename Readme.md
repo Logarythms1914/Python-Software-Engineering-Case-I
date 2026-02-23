@@ -23,12 +23,12 @@ Python Software Engineering di platform PacMann.
        dengan cara menginput username pengguna).
     3. upgrade_plan (menampilkan harga yang harus dibayar jika ingin
        upgrade plan dari current plan dan mendapat bonus jika durasi
-       plan lebih dari dua belas bulan.
+       plan lebih dari dua belas bulan).
 * class NewUser:
   - Atribut-atributnya:
     1. username (nama pengguna).
   - Method-methodnya:
     1. check_benefit (mengecek semua plan yang ada di PacFlix).
     2. pick_plan (menampilkan harga yang harus dibayar jika ingin
-       membeli plan dan mendapat bonus jika memiliki referral code.
+       membeli plan dan mendapat bonus jika memiliki referral code).
   
