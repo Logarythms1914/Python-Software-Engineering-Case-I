@@ -1,5 +1,12 @@
 from tabulate import tabulate 
-from database import data  # mengambil data-data yang ada di database
+
+data = {
+    "Shandy": ["Basic Plan", 12, "shandy-2134"],
+    "Cahya": ["Standard Plan", 24, "cahya-abcd"],
+    "Ana": ["Premium Plan", 5, "ana-2f9g"],
+    "Bagus": ["Basic Plan", 11, "bagus-9f92"]
+}  # Database PacFlix
+
 
 class User:
     def __init__(self,username):
@@ -21,3 +28,6 @@ class User:
                        ]
         print(tabulate(benefit_plan, headers='firstrow', \
                        tablefmt='mixed_grid', maxcolwidths=[20,25,25,25]))
+    
+
+    
