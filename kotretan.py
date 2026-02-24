@@ -10,7 +10,8 @@ data = {
 
 class User:
     def __init__(self,username):
-        self.username = username
+        username = username.lower()
+        self.username = username.capitalize()
     
 
     def check_benefit(self):
@@ -30,4 +31,11 @@ class User:
                        tablefmt='mixed_grid', maxcolwidths=[20,25,25,25]))
     
 
-    
+    def check_plan(self):
+        if self.username not in data.keys():
+            raise Exception('Maaf, anda tidak sedang berlangganan.')
+        else:
+            self.current_plan = data[self.username][0]
+            self.duration_plan = data[self.username][1]
+        print(f'Kamu sedang berlangganan {self.current_plan} dengan '
+              f'durasi {self.duration_plan} bulan')
