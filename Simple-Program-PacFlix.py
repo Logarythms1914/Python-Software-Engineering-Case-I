@@ -33,7 +33,8 @@ class User:
     
 
     def check_plan(self):
-        if self.username not in data.keys():
+        user_data = data.get(self.username)
+        if user_data == None:
             raise Exception('Maaf, anda tidak sedang berlangganan.')
         else:
             self.current_plan = data[self.username][0]  # plan yg sdng digunakan
@@ -49,7 +50,8 @@ class User:
 
 
     def upgrade_plan(self,new_plan):
-        if self.username not in data.keys():
+        user_data = data.get(self.username)
+        if user_data == None:
             raise Exception('Maaf, anda tidak sedang berlangganan.')
         else:
             self.current_plan = data[self.username][0]
@@ -106,5 +108,3 @@ class NewUser:
             index_new_plan = benefit_plan[0].index(new_plan)
             final_price = benefit_plan[-1][index_new_plan]
             print(f'Total biaya langganan ke {new_plan} adalah Rp{final_price:_}')
-
-                
