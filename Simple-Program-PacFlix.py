@@ -87,6 +87,24 @@ class NewUser:
     def check_benefit(self):
         print(tabulate(benefit_plan, headers='firstrow', \
                        tablefmt='mixed_grid', maxcolwidths=[20,25,25,25]))
-
+        
+    
+    def pick_plan(self,new_plan,referral_code):
+        # membuat list referral_code dari database
+        referral_code_list = []
+        for key in data:
+            referral_code_list.append(data[key][-1]) 
+        
+        # perhitungan biaya plan
+        if referral_code in referral_code_list:
+            index_new_plan = benefit_plan[0].index(new_plan)
+            discount = 4/100
+            new_plan_price = benefit_plan[-1][index_new_plan]
+            final_price = new_plan_price - new_plan_price * discount
+            print(f'Total biaya langganan ke {new_plan} adalah Rp{final_price:_}')
+        else:
+            index_new_plan = benefit_plan[0].index(new_plan)
+            final_price = benefit_plan[-1][index_new_plan]
+            print(f'Total biaya langganan ke {new_plan} adalah Rp{final_price:_}')
 
                 
