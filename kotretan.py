@@ -26,6 +26,7 @@ class User:
                     ['price (Rp):', 120_000, 160_000, 200_000]
                     ]  # tabel semua plan dan benefitnya
 
+
     def check_benefit(self):
         print(tabulate(self.benefit_plan, headers='firstrow', \
                        tablefmt='mixed_grid', maxcolwidths=[20,25,25,25]))
@@ -35,13 +36,46 @@ class User:
         if self.username not in data.keys():
             raise Exception('Maaf, anda tidak sedang berlangganan.')
         else:
-            self.current_plan = data[self.username][0]
-            self.duration_plan = data[self.username][1]
-            print(f'Kamu sedang berlangganan {self.current_plan} dengan '
-                  f'durasi {self.duration_plan} bulan.')
-            print(f'Berikut merupakan tabel benefit {self.current_plan}')
+            self.current_plan = data[self.username][0]  # plan yg sdng digunakan
+            self.duration_plan = data[self.username][1] # durasi plan yg sdng digunakan
             benefit_current_plan = [[x[0],x[self.benefit_plan[0].index(self.current_plan)]] 
                                     for x in self.benefit_plan
                                    ] # tabel benefit plan yang sedang digunakan user
+            
+            print(f'Kamu sedang berlangganan {self.current_plan} dengan '
+                  f'durasi {self.duration_plan} bulan.')
+            print(f'Berikut merupakan tabel benefit {self.current_plan}')
             print(tabulate(benefit_current_plan,headers='firstrow',tablefmt='mixed_grid'))
-        
+
+
+    def upgrade_plan(self,new_plan):
+        if self.username not in data.keys():
+            raise Exception('Maaf, anda tidak sedang berlangganan.')
+        else:
+            self.current_plan = data[self.username][0]
+            self.duration_plan = data[self.username][1]
+            index_current_plan = self.benefit_plan[0].index(self.current_plan)
+            index_new_plan = self.benefit_plan[0].index(new_plan)
+            if index_new_plan >= index_current_plan:
+                '''
+                pernyataan 'index_new_plan >= index_current_plan' bertujuan untuk
+                mengecek apakah user upgrade ke plan lebih di atas atau downgrade. 
+                Jika indeksnya lebih dari atau sama dengan maka berarti upgrade 
+                dan sebaliknya.
+                '''
+                if self.duration_plan > 12:
+                    new_plan_price = self.benefit_plan[-1][index_new_plan]
+                    discount = 5/100
+
+                    final_price = new_plan_price - new_plan_price * discount
+
+                    print(f'Total biaya langganan ke {new_plan} adalah Rp{int(final_price):_}')
+                else:
+                    final_price = self.benefit_plan[-1][index_new_plan]
+                    
+                    print(f'Total biaya langganan ke {new_plan} adalah Rp{final_price:_}')
+            else:
+                raise Exception('Maaf, tidak bisa berlangganan downgrade plan.')
+
+
+                
